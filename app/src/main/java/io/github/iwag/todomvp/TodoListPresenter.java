@@ -1,5 +1,9 @@
 package io.github.iwag.todomvp;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,9 +18,16 @@ public class TodoListPresenter implements TodoListContract.Presenter {
 
     TodoRepository repository;
 
-    public TodoListPresenter() {
+    public TodoListPresenter(LifecycleOwner owner) {
+        mValues = new LinkedList<>();
         repository = new TodoRepositoryImpl();
-        mValues = repository.getList();
+        repository.getList().observe(owner, new Observer<List<TodoContent.TodoItem>>() {
+            @Override
+            public void onChanged(@Nullable List<TodoContent.TodoItem> todoItems) {
+                mValues.addAll(todoItems);
+            }
+        });
+
     }
 
     @Override

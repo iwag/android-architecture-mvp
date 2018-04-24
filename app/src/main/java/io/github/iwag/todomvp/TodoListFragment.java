@@ -2,7 +2,7 @@ package io.github.iwag.todomvp;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.github.iwag.todomvp.dummy.TodoContent;
 import io.github.iwag.todomvp.dummy.TodoContent.TodoItem;
 
 /**
@@ -67,7 +66,7 @@ public class TodoListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTodoListRecyclerViewAdapter(mListener));
+            recyclerView.setAdapter(new MyTodoListRecyclerViewAdapter(mListener, new TodoListPresenter(this)));
         }
         return view;
     }

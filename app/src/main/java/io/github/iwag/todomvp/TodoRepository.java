@@ -1,5 +1,7 @@
 package io.github.iwag.todomvp;
 
+import android.arch.lifecycle.LiveData;
+
 import java.util.List;
 
 import io.github.iwag.todomvp.dummy.TodoContent;
@@ -9,5 +11,5 @@ import io.github.iwag.todomvp.dummy.TodoContent;
  */
 
 public interface TodoRepository {
-    List<TodoContent.TodoItem> getList();
+    LiveData<List<TodoContent.TodoItem>> getList();
 }

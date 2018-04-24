@@ -1,5 +1,8 @@
 package io.github.iwag.todomvp;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +14,9 @@ import io.github.iwag.todomvp.dummy.TodoContent;
 
 public class TodoRepositoryImpl implements TodoRepository {
     @Override
-    public List<TodoContent.TodoItem> getList() {
-        return new LinkedList<>();
+    public LiveData<List<TodoContent.TodoItem>> getList() {
+        MutableLiveData<List<TodoContent.TodoItem>> liveData = new MutableLiveData<>();
+        liveData.setValue(new LinkedList<TodoContent.TodoItem>());
+        return liveData;
     }
 }

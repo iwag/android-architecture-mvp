@@ -9,8 +9,6 @@ import android.widget.TextView;
 import io.github.iwag.todomvp.TodoListFragment.OnListFragmentInteractionListener;
 import io.github.iwag.todomvp.dummy.TodoContent.TodoItem;
 
-import java.util.List;
-
 /**
  * {@link RecyclerView.Adapter} that can display a {@link TodoItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
@@ -21,16 +19,15 @@ public class MyTodoListRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoLi
     private final OnListFragmentInteractionListener mListener;
     private TodoListContract.Presenter mPresenter;
 
-    public MyTodoListRecyclerViewAdapter(OnListFragmentInteractionListener listener) {
+    public MyTodoListRecyclerViewAdapter(OnListFragmentInteractionListener listener, TodoListContract.Presenter presenter) {
         mListener = listener;
+        this.mPresenter = presenter;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_todolist, parent, false);
-
-        mPresenter = new TodoListPresenter();
 
         return new ViewHolder(view);
     }
