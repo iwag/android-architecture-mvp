@@ -18,11 +18,10 @@ import java.util.List;
  */
 public class MyTodoListRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoListRecyclerViewAdapter.ViewHolder> {
 
-    private final List<TodoItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private TodoListContract.Presenter mPresenter;
 
-    public MyTodoListRecyclerViewAdapter(List<TodoItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public MyTodoListRecyclerViewAdapter(OnListFragmentInteractionListener listener) {
         mListener = listener;
     }
 
@@ -30,14 +29,17 @@ public class MyTodoListRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoLi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_todolist, parent, false);
+
+        mPresenter = new TodoListPresenter();
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mItem = mPresenter.get(position);
+        holder.mIdView.setText(mPresenter.get(position).id);
+        holder.mContentView.setText(mPresenter.get(position).content);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +55,7 @@ public class MyTodoListRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoLi
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return mPresenter.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
