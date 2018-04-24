@@ -12,8 +12,11 @@ import io.github.iwag.todomvp.dummy.TodoContent;
 public class TodoListPresenter implements TodoListContract.Presenter {
     private final List<TodoContent.TodoItem> mValues;
 
+    TodoRepository repository;
+
     public TodoListPresenter() {
-        mValues = new LinkedList<>();
+        repository = new TodoRepositoryImpl();
+        mValues = repository.getList();
     }
 
     @Override
