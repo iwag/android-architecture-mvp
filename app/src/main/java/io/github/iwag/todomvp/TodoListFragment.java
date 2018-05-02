@@ -35,7 +35,7 @@ public class TodoListFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static TodoListFragment newInstance(int columnCount) {
+    public static Fragment newInstance(int columnCount) {
         TodoListFragment fragment = new TodoListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
